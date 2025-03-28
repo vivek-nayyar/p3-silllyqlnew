@@ -32,7 +32,7 @@ void parse_options(int argc, char **argv, Options &options){
                 options.quiet = true;
                 break;
             default:
-                cerr << "Error: Invalid option\n";
+                cerr << "Error: Unknown command line option\n";
                 exit(1);
         }
     }

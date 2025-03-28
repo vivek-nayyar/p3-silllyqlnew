@@ -4,18 +4,6 @@
 
 using namespace std;
 
-ColumnType Silly::string_to_col_type(const std::string& str) {
-    if (str == "String") 
-        return ColumnType::String;
-    if (str == "Double") 
-        return ColumnType::Double;
-    if (str == "Int") 
-        return ColumnType::Int;
-    else 
-        return ColumnType::Bool;
-}
-
-
 Silly::Silly(const Options &options) : options(options){
 
 }
@@ -35,27 +23,32 @@ void Silly::read_command(){
         quit();
         break;
     case '#':
-        /* code */
+        comment();
         break;
     case 'R':
-        /* code */
+        remove();
         break;
     case 'I':
-        /* code */
+        insert();
         break;
     case 'P':
-        /* code */
+        print();
         break;
     case 'D':
-        /* code */
+        delete_();
         break;
     case 'J':
-        /* code */
+    {
+        string dummy;
+        getline(cin, dummy);
         break;
+    }
     case 'G':
-        /* code */
+    {
+        string dummy;
+        getline(cin, dummy);
         break;
-
+    }
 
     default:
         break;
@@ -68,7 +61,8 @@ void Silly::create(){ // const string &table_name, int num_cols, vector<ColumnTy
     cin >> table_name;
 
     if (tables.find(table_name) != tables.end()) {
-        std::cerr << "Table \"" << table_name << "\" already exists.\n";
+        std::cout << "Error during CREATE: Cannot create already existing table " << table_name << "\n";
+        getline(cin,table_name);
         return;
     }
 
@@ -105,18 +99,93 @@ void Silly::quit(){
     options.quit = true; 
 }
 
+// get rid of stuff after #
+void Silly::comment(){
+    string dummy;
+    getline(cin, dummy);
+}
+
+// delete tables[table_name]
 void Silly::remove(){
+
+    string table_name;
+    cin >> table_name;
+
+    // if there's no table_name in tables, error!!
+    if (tables.find(table_name) == tables.end())
+        print_table_not_in("REMOVE", table_name);
+
+    delete tables[table_name];
+    tables.erase(table_name);
+    cout << "Table " << table_name << " removed\n";
+}
+
+void Silly::insert(){
+    string table_name;
+    cin >> table_name;
+    cin >> table_name;
+
+    // if there's no table_name in tables, error!!
+    if (tables.find(table_name) == tables.end()) 
+        print_table_not_in("INSERT", table_name);
+    
+    tables[table_name]->insert();
+}
+
+void Silly::print(){
+    string table_name;
+    cin >> table_name;
+    cin >> table_name;
+
+    // if there's no table_name in tables, error!!
+    if (tables.find(table_name) == tables.end()) 
+        print_table_not_in("PRINT", table_name);
+    
+    tables[table_name]->print(options.quiet);
+}
+
+void Silly::delete_(){
+    string table_name;
+    cin >> table_name;
+    cin >> table_name;
+
+    if (tables.find(table_name) == tables.end()) 
+    print_table_not_in("DELETE", table_name);
+
+    tables[table_name]->delete_();
+}
+
+void Silly::join(){
+    return;
+}
+
+void Silly::generate(){
+    string table_name;
+    cin >> table_name;
+    cin >> table_name;
+
+    if (tables.find(table_name) == tables.end()) 
+    print_table_not_in("PRINT", table_name);
+
+    tables[table_name]->generate();
 
 }
 
 void Silly::run(){
     while (!options.quit){
+        if (cin.fail()) {
+            cerr << "Error: Reading from cin has failed" << endl;
+            exit(1);
+        }        
+        cout << "% ";
         read_command();
     }
 }
 
 int main(int argc, char **argv){
     ios_base::sync_with_stdio(false);
+    cin >> std::boolalpha;  // add these two lines
+    cout << std::boolalpha; // add these two lines
 
     Options options;
     parse_options(argc,argv,options);
@@ -126,3 +195,25 @@ int main(int argc, char **argv){
     silly.run();
     return 0;
 }
+
+// ==================================RANDOMSHIT==========================================
+
+ColumnType Silly::string_to_col_type(const std::string& str) {
+    if (str == "string") 
+        return ColumnType::String;
+    if (str == "double") 
+        return ColumnType::Double;
+    if (str == "int") 
+        return ColumnType::Int;
+    else 
+        return ColumnType::Bool;
+}
+
+void Silly::print_table_not_in(const string& command, const string& table_name){
+    string dummy;
+    std::cout << "Error during "<< command << ": " << table_name << " does not name a table in the database\n";
+    getline(cin,dummy);
+    return;
+}
+
+// ==================================RANDOMSHIT==========================================
