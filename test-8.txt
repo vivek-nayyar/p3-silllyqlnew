@@ -1,0 +1,17 @@
+CREATE people 2 string bool name funny?
+INSERT INTO people 5 ROWS
+Vivek true
+Wayne false
+Emily true
+Eric true
+Tiff false
+GENERATE FOR people hash INDEX ON name
+DELETE FROM people WHERE name = Vivek
+DELETE FROM people WHERE name = Wayne
+DELETE FROM people WHERE name = Eric
+PRINT FROM people 2 name funny? ALL
+## shouldn't just be emily
+GENERATE FOR people hash INDEX ON name
+PRINT FROM people 2 name funny? WHERE name = Tiff
+## check if quit clears memory without remove table
+QUIT

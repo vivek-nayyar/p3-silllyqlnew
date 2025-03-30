@@ -1,0 +1,17 @@
+CREATE A 2 string int name id
+INSERT INTO A 3 ROWS
+x 1
+y 2
+z 3
+CREATE B 2 int string id data
+INSERT INTO B 2 ROWS
+4 none
+5 nothing
+JOIN A AND B WHERE id = id AND PRINT 2 name 1 data 2
+INSERT INTO B 2 ROWS
+2 found
+3 match
+JOIN A AND B WHERE id = id AND PRINT 2 name 1 data 2
+REMOVE A
+REMOVE B
+QUIT

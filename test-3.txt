@@ -1,0 +1,13 @@
+# blah ahla h
+CREATE Animals 3 string int bool Species Age IsEndangered
+INSERT INTO Animals 3 ROWS
+tiger 5 true
+zebra 7 false
+panda 6 true
+PRINT FROM Animals 3 Species Age IsEndangered ALL
+DELETE FROM Animals WHERE Age < 6
+GENERATE FOR Animals hash INDEX ON Species
+PRINT FROM Animals 2 Species Age WHERE Species = tiger
+REMOVE Animals
+INSERT INTO Animals 1 ROWS 
+QUIT

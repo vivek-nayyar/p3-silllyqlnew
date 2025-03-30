@@ -1,0 +1,15 @@
+CREATE log 2 string int Tag Level
+INSERT INTO log 5 ROWS
+A 3
+B 1
+A 2
+C 3
+A 1
+GENERATE FOR log hash INDEX ON Tag
+DELETE FROM log WHERE Tag = A
+PRINT FROM log 2 Tag Level ALL
+GENERATE FOR log bst INDEX ON Level
+DELETE FROM log WHERE Level > 1
+PRINT FROM log 2 Tag Level ALL
+REMOVE log
+QUIT

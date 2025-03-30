@@ -1,0 +1,15 @@
+# blah blah
+# blah blah
+CREATE movies 4 string int double bool name duration rating recommended
+INSERT INTO movies 5 ROWS
+Inception 3 9.5 true
+Avatar 4 9.8 true
+Titanic 6 9.7 false
+Minions 3 9.2 true
+Frozen 4 8.5 false
+GENERATE FOR movies hash INDEX ON duration
+PRINT FROM movies 2 name rating WHERE duration = 4
+GENERATE FOR movies bst INDEX ON rating
+PRINT FROM movies 1 name WHERE rating > 9.5
+REMOVE movies
+QUIT

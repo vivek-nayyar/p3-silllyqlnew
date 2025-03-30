@@ -1,0 +1,16 @@
+CREATE gadgets 2 string bool model functional
+INSERT INTO gadgets 3 ROWS
+phone true
+toaster false
+laptop true
+GENERATE FOR gadgets hash INDEX ON functional
+DELETE FROM gadgets WHERE functional = false
+CREATE estores 2 string string model location
+INSERT INTO estores 3 ROWS
+phone bestbuy
+laptop microcenter
+toaster walmart
+GENERATE FOR gadgets bst INDEX ON model
+PRINT FROM gadgets 1 model WHERE model > phone
+JOIN estores AND gadgets WHERE model = model AND PRINT 2 location 1 model 2
+QUIT

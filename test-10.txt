@@ -1,0 +1,17 @@
+CREATE Temps 1 int degrees
+INSERT INTO Temps 5 ROWS
+10
+20
+30
+40
+#blah
+50
+GENERATE FOR Temps bst INDEX ON degrees
+PRINT FROM Temps 1 degrees WHERE degrees < 20
+PRINT FROM Temps 1 degrees WHERE degrees < 30
+PRINT FROM Temps 1 degrees WHERE degrees = 30
+PRINT FROM Temps 1 degrees WHERE degrees > 40
+#blah
+PRINT FROM Temps 1 degrees WHERE degrees > 30
+PRINT FROM Temps 1 degrees WHERE degrees = 50
+QUIT

@@ -17,13 +17,6 @@ class Table{
         vector<string> column_names;
         vector<vector<Field>> data;
 
-        // ============================== INDICES STUFF ==============================
-        unordered_map<Field, vector<size_t>> hash_index;
-        map<Field, vector<size_t>> bst_index;
-        int index_col = -1; // which column is currently indexed
-        enum class IndexType { NONE, HASH, BST };
-        IndexType current_index_type = IndexType::NONE;
-        // ============================== INDICES STUFF ==============================
     public:
         Table(const string &name, vector<ColumnType> &col_types, vector<string> &col_names);
         void print_created();
@@ -35,7 +28,21 @@ class Table{
         void delete_();
         void generate();
 
+        // ============================== HELPERS ====================================
+        size_t get_col_index(const string& col_name) const; 
+        const vector<vector<Field>> &get_data() const;
         bool matches_condition(const Field& field, const string& op, const string& raw, ColumnType type);
+        Field make_field(const std::string& raw, ColumnType type) const;
+        // ============================== HELPERS ====================================
+
+        // ============================== INDICES STUFF ==============================
+        unordered_map<Field, vector<size_t>> hash_index; //unsorted map
+        map<Field, vector<size_t>> bst_index; // sorted map
+        int index_col = -1; // which column is currently indexed
+        enum class IndexType { NONE, HASH, BST };
+        IndexType current_index_type = IndexType::NONE;
+        // ============================== INDICES STUFF ==============================
+        
 
 };
 

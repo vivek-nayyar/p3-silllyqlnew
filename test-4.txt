@@ -1,0 +1,17 @@
+#blahblahhhhhhhh
+CREATE scores 2 string int name score
+INSERT INTO scores 6 ROWS
+Alice 70
+Bob 85
+Charlie 60
+Dave 90
+Eve 75
+Frank 88
+GENERATE FOR scores bst INDEX ON score
+DELETE FROM scores WHERE score < 80
+PRINT FROM scores 2 name score ALL
+REMOVE scores
+# try nonexistent
+INSERT INTO nonexistent 1 ROWS
+value1 123
+QUIT
