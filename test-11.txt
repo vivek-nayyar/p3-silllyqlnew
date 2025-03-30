@@ -1,0 +1,14 @@
+CREATE movies 3 string string int name director year
+INSERT INTO movies 4 ROWS
+inception nolan 2010
+avatar cameron 2009
+interstellar nolan 2014
+titanic cameron 1997
+PRINT FROM movies 2 name year WHERE year = 2009
+GENERATE FOR movies hash INDEX ON year
+DELETE FROM movies WHERE year = 2009
+PRINT FROM movies 2 name year WHERE year = 2009
+GENERATE FOR movies bst INDEX ON director
+PRINT FROM movies 1 director WHERE director = nolan
+REMOVE movies
+QUIT

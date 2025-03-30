@@ -1,4 +1,3 @@
-# blah ahla h
 CREATE Animals 3 string int bool Species Age IsEndangered
 INSERT INTO Animals 3 ROWS
 tiger 5 true

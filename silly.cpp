@@ -63,7 +63,7 @@ void Silly::create(){ // const string &table_name, int num_cols, vector<ColumnTy
     cin >> table_name;
 
     if (tables.find(table_name) != tables.end()) {
-        std::cout << "Error during CREATE: Cannot create already existing table " << table_name << "\n";
+        cout << "Error during CREATE: Cannot create already existing table " << table_name << "\n";
         getline(cin,table_name);
         return;
     }
@@ -114,8 +114,11 @@ void Silly::remove(){
     cin >> table_name;
 
     // if there's no table_name in tables, error!!
-    if (tables.find(table_name) == tables.end())
+    if (tables.find(table_name) == tables.end()) {        
         print_table_not_in("REMOVE", table_name);
+        getline(cin,table_name);
+        return;
+    }
 
     delete tables[table_name];
     tables.erase(table_name);
@@ -128,9 +131,11 @@ void Silly::insert(){
     cin >> table_name;
 
     // if there's no table_name in tables, error!!
-    if (tables.find(table_name) == tables.end()) 
+    if (tables.find(table_name) == tables.end()) {        
         print_table_not_in("INSERT", table_name);
-    
+        // getline(cin,table_name);
+        return;
+    }
     tables[table_name]->insert();
 }
 
@@ -140,9 +145,11 @@ void Silly::print(){
     cin >> table_name;
 
     // if there's no table_name in tables, error!!
-    if (tables.find(table_name) == tables.end()) 
+    if (tables.find(table_name) == tables.end()) {        
         print_table_not_in("PRINT", table_name);
-    
+        getline(cin,table_name);
+        return;
+    }
     tables[table_name]->print(options.quiet);
 }
 
@@ -150,8 +157,11 @@ void Silly::delete_(){
     string table_name;
     cin >> table_name >> table_name;
 
-    if (tables.find(table_name) == tables.end()) 
-    print_table_not_in("DELETE", table_name);
+    if (tables.find(table_name) == tables.end()) {        
+        print_table_not_in("DELETE", table_name);
+        getline(cin,table_name);
+        return;
+    }
 
     tables[table_name]->delete_();
 }
@@ -160,11 +170,17 @@ void Silly::join(){
     string dummy, table_name1, table_name2;
     cin >> table_name1 >> dummy >> table_name2 >> dummy;
 
-    if (tables.find(table_name1) == tables.end()) 
+    if (tables.find(table_name1) == tables.end()) {        
         print_table_not_in("JOIN", table_name1);
+        getline(cin,dummy);
+        return;
+    }
 
-    if (tables.find(table_name2) == tables.end()) 
+    if (tables.find(table_name2) == tables.end()) {        
         print_table_not_in("JOIN", table_name2);
+        getline(cin,dummy);
+        return;
+    }
 
     Table * table1 = tables[table_name1];
     Table * table2 = tables[table_name2];
@@ -310,8 +326,11 @@ void Silly::generate(){
     cin >> table_name;
     cin >> table_name;
 
-    if (tables.find(table_name) == tables.end()) 
-    print_table_not_in("GENERATE", table_name);
+    if (tables.find(table_name) == tables.end()){
+        print_table_not_in("GENERATE", table_name);
+        getline(cin,table_name);
+        return;
+    }
 
     tables[table_name]->generate();
 
