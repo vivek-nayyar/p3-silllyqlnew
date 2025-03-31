@@ -235,6 +235,7 @@ void Table::delete_(){
 
     if (col_index == numeric_limits<size_t>::max()) {
         cout << "Error during DELETE: " << col_name << " does not name a column in " << name << "\n";
+        getline(cin, col_name);
         return;
     }
 

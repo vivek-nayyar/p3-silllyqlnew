@@ -1,0 +1,20 @@
+# Test DELETE on a non-existent column
+CREATE employees 3 string int bool name age fulltime
+INSERT INTO employees 2 ROWS
+alice 30 true
+bob 25 false
+DELETE FROM employees WHERE salary > 50000
+REMOVE employees
+CREATE movies 3 string int bool title year awardwinning
+INSERT INTO movies 2 ROWS
+Inception 2010 true
+Frozen 2013 false
+GENERATE FOR movies hash INDEX ON director
+REMOVE movies
+CREATE books 2 string int title pages
+INSERT INTO books 2 ROWS
+Dune 412
+It 1138
+PRINT FROM books 2 title author ALL
+REMOVE books
+QUIT
