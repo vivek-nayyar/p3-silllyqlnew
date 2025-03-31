@@ -114,13 +114,14 @@ void Silly::remove(){
     cin >> table_name;
 
     // if there's no table_name in tables, error!!
-    if (tables.find(table_name) == tables.end()) {        
+    auto iter = tables.find(table_name);
+    if (iter == tables.end()) {        
         print_table_not_in("REMOVE", table_name);
         getline(cin,table_name);
         return;
     }
 
-    delete tables[table_name];
+    delete iter->second;
     tables.erase(table_name);
     cout << "Table " << table_name << " removed\n";
 }
