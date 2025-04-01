@@ -1,0 +1,41 @@
+CREATE squads 3 int string int squad_id squad_name members
+INSERT INTO squads 4 ROWS
+1 Alpha 10
+2 Bravo 25
+3 Charlie 15
+4 Delta 12
+PRINT FROM squads 2 squad_id squad_name WHERE members > 10
+GENERATE FOR squads bst INDEX ON members
+PRINT FROM squads 2 squad_id squad_name WHERE members > 10
+DELETE FROM squads WHERE squad_id = 3
+PRINT FROM squads 2 squad_id squad_name WHERE members > 10
+CREATE units 3 int string int unit_id unit_name personnel
+GENERATE FOR units bst INDEX ON personnel
+INSERT INTO units 3 ROWS
+201 Echo 5
+202 Foxtrot 8
+203 Golf 3
+PRINT FROM units 2 unit_name personnel WHERE personnel > 4
+CREATE players 3 int string double player_id alias accuracy
+INSERT INTO players 4 ROWS
+11 Flash 92.5
+12 Ghost 85.1
+13 Nova 88.0
+14 Viper 95.2
+GENERATE FOR players bst INDEX ON accuracy
+PRINT FROM players 2 alias accuracy WHERE accuracy > 90.0
+GENERATE FOR players hash INDEX ON player_id
+PRINT FROM players 2 player_id alias WHERE player_id = 12
+CREATE novels 3 int string int novel_id title stock
+INSERT INTO novels 3 ROWS
+3011 "The-Alchemist" 4
+3012 "Dune" 6
+3013 "Neuromancer" 5
+GENERATE FOR novels bst INDEX ON stock
+PRINT FROM novels 2 title stock WHERE stock > 4
+DELETE FROM novels WHERE novel_id = 3012
+PRINT FROM novels 2 title stock WHERE stock > 4
+INSERT INTO novels 1 ROWS
+3014 "Snow-Crash" 7
+PRINT FROM novels 2 title stock WHERE stock > 4
+QUIT

@@ -1,27 +1,24 @@
-#Awesome Spec Example Detailed!
-CREATE 281class 3 string string bool emotion person Y/N
-INSERT INTO 281class 8 ROWS
-happy Darden true
-stressed students false
-busy office_hours true
-stressed students true
-stressed Paoletti true
-happy Darden true
-happy Sith true
-victorious Sith true
-PRINT FROM 281class 3 emotion person Y/N ALL
-DELETE FROM 281class WHERE person = Darden
-PRINT FROM 281class 3 emotion person Y/N ALL
-GENERATE FOR 281class hash INDEX ON emotion
-PRINT FROM 281class 3 emotion person Y/N ALL
-PRINT FROM 281class 2 person emotion WHERE Y/N = true
-CREATE pets 3 string bool bool Name likes_cats? likes_dogs?
-INSERT INTO pets 2 ROWS
-Sith true true
-Paoletti true false
-PRINT FROM pets 3 Name likes_cats? likes_dogs? ALL
-PRINT FROM 281class 3 emotion person Y/N ALL
-JOIN pets AND 281class WHERE Name = person AND PRINT 3 Name 1 emotion 2 likes_dogs? 1
-REMOVE pets
-REMOVE 281class
+CREATE games 3 int string int id title score
+INSERT INTO games 5 ROWS
+1 zelda 86
+2 stardew 90
+3 portal 93
+4 minesweeper 70
+5 tetris 95
+GENERATE FOR games hash INDEX ON score
+PRINT FROM games 3 score id title ALL
+PRINT FROM games 1 id WHERE score > 93
+PRINT FROM games 1 id WHERE score < 93
+PRINT FROM games 1 id WHERE score = 93
+PRINT FROM games 2 id title WHERE title = zelda
+PRINT FROM games 1 id WHERE score = 93
+GENERATE FOR games bst INDEX ON score
+PRINT FROM games 3 score id title ALL
+PRINT FROM games 1 id WHERE score > 93
+PRINT FROM games 1 id WHERE score < 93
+PRINT FROM games 1 id WHERE score = 93
+PRINT FROM games 2 id title WHERE title = zelda
+PRINT FROM games 1 id WHERE score = 93
+DELETE FROM games WHERE id > 4
+DELETE FROM games WHERE score = 90
 QUIT

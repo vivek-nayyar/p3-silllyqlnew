@@ -1,0 +1,29 @@
+CREATE members 4 string string int bool Name Contact Age Subscribed
+CREATE items 4 int string double bool IID Title Cost Available
+CREATE purchases 4 string int int string MID IID Count Timestamp
+INSERT INTO members 3 ROWS
+alice alice@domain.com 28 true
+bob bob@domain.com 35 true
+charlie charlie@domain.com 21 false
+INSERT INTO items 4 ROWS
+201 Keyboard 49.99 true
+202 Mouse 29.99 true
+203 Webcam 89.99 false
+204 Chair 149.99 true
+INSERT INTO purchases 5 ROWS
+alice 201 1 2023-01-10
+alice 204 2 2023-02-25
+bob 202 1 2023-01-19
+charlie 203 1 2023-03-10
+bob 204 1 2023-04-15
+GENERATE FOR members hash INDEX ON Contact
+GENERATE FOR items bst INDEX ON Cost
+GENERATE FOR purchases hash INDEX ON MID
+JOIN members AND purchases WHERE Name = MID AND PRINT 4 Name 1 IID 2 Count 2 Timestamp 2
+JOIN items AND purchases WHERE IID = IID AND PRINT 5 IID 1 Title 1 Cost 1 MID 2 Count 2
+DELETE FROM purchases WHERE Timestamp < "2023-02-01"
+INSERT INTO purchases 2 ROWS
+alice 202 1 2023-05-20
+bob 201 1 2023-06-05
+JOIN members AND purchases WHERE Name = MID AND PRINT 3 Name 1 IID 2 Timestamp 2 WHERE IID = 201
+QUIT

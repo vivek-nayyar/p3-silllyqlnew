@@ -1,0 +1,7 @@
+CREATE t 1 string atlas
+INSERT INTO t 3 ROWS
+flynn
+gavin
+livia
+PRINT FROM t 1 atlas WHERE atlas > apple
+QUIT

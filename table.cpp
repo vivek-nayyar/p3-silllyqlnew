@@ -358,11 +358,12 @@ bool Table::matches_condition(const Field& field, const string& op, const string
         }
         case ColumnType::String: {
             if (op == "=") return field == raw;
+            if (op == "<") return field < raw;
+            if (op == ">") return field > raw;
             break;
         }
     }
     return false; // fallback if op/type combo is invalid
-
 }
 
 size_t Table::get_col_index(const string& col_name) const {

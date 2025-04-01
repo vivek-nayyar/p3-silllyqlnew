@@ -117,7 +117,6 @@ void Silly::remove(){
     auto iter = tables.find(table_name);
     if (iter == tables.end()) {        
         print_table_not_in("REMOVE", table_name);
-        getline(cin,table_name);
         return;
     }
 
@@ -134,7 +133,7 @@ void Silly::insert(){
     // if there's no table_name in tables, error!!
     if (tables.find(table_name) == tables.end()) {        
         print_table_not_in("INSERT", table_name);
-        // getline(cin,table_name);
+        getline(cin,table_name);
         return;
     }
     tables[table_name]->insert();
@@ -142,13 +141,13 @@ void Silly::insert(){
 
 void Silly::print(){
     string table_name;
-    cin >> table_name;
-    cin >> table_name;
+    string dummy;
+    cin >> dummy >> table_name;
 
     // if there's no table_name in tables, error!!
     if (tables.find(table_name) == tables.end()) {        
         print_table_not_in("PRINT", table_name);
-        getline(cin,table_name);
+        getline(cin,dummy);
         return;
     }
     tables[table_name]->print(options.quiet);
@@ -376,9 +375,7 @@ ColumnType Silly::string_to_col_type(const string& str) {
 }
 
 void Silly::print_table_not_in(const string& command, const string& table_name){
-    string dummy;
-    std::cout << "Error during "<< command << ": " << table_name << " does not name a table in the database\n";
-    getline(cin,dummy);
+    cout << "Error during "<< command << ": " << table_name << " does not name a table in the database\n";
     return;
 }
 
